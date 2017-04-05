@@ -31,20 +31,12 @@ end
 
 def titleize response
 	
-	words = response.split
+	str = response
+	articles = %w{of over and the}
 
-	words.each do |word|
-
-		if word == 'and' or word == 'over' or word == 'the'
-			word.downcase!
-		elsif word.length >= 3
-			word.capitalize!
-		end
+	str.gsub(/(^\w+)|(\w+)/) do
+		$1 ? $1.capitalize :
+			articles.include?($2) ? $2 : $2.capitalize
 	end
-	
-	words.join ' '
 		
 end
-
-
-# response.gsub(/\w+/) {|word| word.capitalize}
